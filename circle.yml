@@ -17,14 +17,14 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}
 
       - run: yarn install --pure-lockfile
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}
         
 
   deploy:
@@ -36,7 +36,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-{{ checksum "yarn.lock" }}-{{ checksum "package.json" }}
 
       - run:
           name: Install create-react-scripts
