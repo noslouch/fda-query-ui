@@ -40,7 +40,7 @@ jobs:
 
       - run:
           name: Install create-react-scripts
-          command: yarn global add create-react-scripts
+          command: yarn global add create-react-app
       - run:
           name: Deploy to GitHub Pages
           command: npm run deploy
