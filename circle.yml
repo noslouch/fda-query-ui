@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8
+      - image: circleci/node:9
       
     working_directory: ~/app
 
@@ -29,18 +29,18 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:9
 
-      steps:
-        - checkout
+    steps:
+      - checkout
 
-        - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
 
-        - run:
-            name: Deploy to GitHub Pages
-            command: npm run deploy
+      - run:
+          name: Deploy to GitHub Pages
+          command: npm run deploy
 
 workflows:
   version: 2
