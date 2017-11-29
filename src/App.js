@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import QueryOutput from './components/query-output';
 import QueryBuilder from './components/query-builder';
+import { queryUrl } from './lib/query-util';
 
 class App extends Component {
   constructor(props) {
@@ -38,7 +39,8 @@ class App extends Component {
     this.setState({ query: {} });
   }
   runQuery() {
-    let url = this.queryUrl()
+    let { query, endpoint, otherParams } = this.state;
+    let url = queryUrl(query, endpoint, otherParams);
     fetch(url).then(r => r.json().then(j => this.setState({results: JSON.stringify(j, null, 2)})))
   }
   
